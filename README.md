@@ -2,29 +2,42 @@
 
 An Agent Skill that turns a spec into a working Playwright + TypeScript test suite. It scaffolds the framework if there is none, explores the app headlessly, writes the tests, and fixes failures from their trace, screenshot, video and HAR.
 
-Works in Claude Code, Codex, Gemini CLI and Antigravity CLI, and in any agent that reads `SKILL.md` skills.
+Works in Claude Code, Codex and Antigravity CLI, and in any agent that reads `SKILL.md` skills.
 
 ## Install
 
-```bash
-# Into the current project, for the agents you choose
-npx skills add akhilvn-crypto/pw-pilot
+Installs use the [`skills`](https://www.npmjs.com/package/skills) CLI through `npx`, so Node.js 18+ is the only requirement. A **project** install makes the skill available in the current repo only. A **global** install (`-g`) makes it available in every project. Start a new agent session after installing.
 
-# Globally, for specific agents
-npx skills add akhilvn-crypto/pw-pilot --skill pw-pilot -g -a claude-code -a codex -a gemini-cli
+### Claude Code
+
+```bash
+# Project: installs into .claude/skills/
+npx skills add akhilvn-crypto/pw-pilot --skill pw-pilot -a claude-code
+
+# Global: installs into ~/.claude/skills/
+npx skills add akhilvn-crypto/pw-pilot --skill pw-pilot -g -a claude-code
 ```
 
-Update later with `npx skills update`.
+Check it with `/skills` inside Claude Code, or run it directly with `/pw-pilot`.
+
+### Codex
+
+```bash
+# Project: installs into .agents/skills/
+npx skills add akhilvn-crypto/pw-pilot --skill pw-pilot -a codex
+
+# Global: installs into ~/.codex/skills/ (or $CODEX_HOME/skills)
+npx skills add akhilvn-crypto/pw-pilot --skill pw-pilot -g -a codex
+```
 
 ### Antigravity CLI
 
-For a single project, install with `-a antigravity-cli`. The skill goes into `.agents/skills/`, which Antigravity CLI reads:
-
 ```bash
+# Project: installs into .agents/skills/
 npx skills add akhilvn-crypto/pw-pilot --skill pw-pilot -a antigravity-cli
 ```
 
-For every project, don't use `-g -a antigravity-cli`. That puts the skill in `~/.gemini/antigravity-cli/skills/`, but Antigravity CLI loads global skills only from `~/.gemini/config/skills/`. Clone the repo and link the skill folder into that directory instead:
+For a global install, don't use `-g -a antigravity-cli`. That puts the skill in `~/.gemini/antigravity-cli/skills/`, but Antigravity CLI loads global skills only from `~/.gemini/config/skills/`. Clone the repo and link the skill folder into that directory instead:
 
 ```powershell
 # Windows (PowerShell)
@@ -40,7 +53,19 @@ mkdir -p ~/.gemini/config/skills
 ln -s "$PWD/pw-pilot/skills/pw-pilot" ~/.gemini/config/skills/pw-pilot
 ```
 
-Start a new `agy` session afterwards. To update, run `git pull` in the clone.
+To update, run `git pull` in the clone.
+
+### Several agents at once
+
+```bash
+# Project
+npx skills add akhilvn-crypto/pw-pilot --skill pw-pilot -a claude-code -a codex -a antigravity-cli
+
+# Global (Antigravity CLI still needs the link step above)
+npx skills add akhilvn-crypto/pw-pilot --skill pw-pilot -g -a claude-code -a codex
+```
+
+Update `npx skills` installs with `npx skills update`. Other agents work too: pass their name to `-a`, for example `-a gemini-cli` for Gemini CLI.
 
 ## Use
 

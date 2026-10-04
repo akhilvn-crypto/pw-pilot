@@ -5,6 +5,7 @@ Rule changes alter how agents write tests, so every change to them is listed her
 ## Unreleased
 
 - README: added Antigravity CLI install steps. A global `npx skills` install for `antigravity-cli` lands in a directory Antigravity CLI doesn't read, so the skill never showed up.
+- README: install steps split per agent (Claude Code, Codex, Antigravity CLI), each with project and global commands. The multi-agent example now targets Antigravity CLI instead of Gemini CLI.
 
 ## 0.1.0 - 2026-10-04
 
