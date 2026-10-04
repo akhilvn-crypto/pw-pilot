@@ -2,6 +2,10 @@
 
 Rule changes alter how agents write tests, so every change to them is listed here.
 
+## Unreleased
+
+- README: added Antigravity CLI install steps. A global `npx skills` install for `antigravity-cli` lands in a directory Antigravity CLI doesn't read, so the skill never showed up.
+
 ## 0.1.0 - 2026-10-04
 
 First public release, adapted from the private `playwright-automator` skill.
